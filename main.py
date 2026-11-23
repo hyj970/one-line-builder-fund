@@ -11,6 +11,12 @@ SENTENCE = (
 if not 1 <= len(SENTENCE) <= 240:
     raise ValueError(f"sentence must be 1-240 characters, got {len(SENTENCE)}")
 
+if "\n" in SENTENCE or "\r" in SENTENCE:
+    raise ValueError("sentence must be a single line with no line breaks")
+
+if SENTENCE[-1] not in ".!?":
+    raise ValueError("sentence must finish with terminal punctuation")
+
 def main():
     os.makedirs("/output", exist_ok=True)
     with open("/output/entry.txt", "w", encoding="utf-8") as f:
